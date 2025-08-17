@@ -9,4 +9,4 @@ class Location(models.Model):
         return self.name
     
     class Meta:
-        verbose_name_plural = "PUCEST Locations"
+        verbose_name_plural = "Delivery Locations"

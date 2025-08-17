@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser
 from apps.Authentication.signals import *
-
+from unfold.admin import ModelAdmin
 from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser, Location
 

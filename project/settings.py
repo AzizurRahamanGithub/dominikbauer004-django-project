@@ -51,15 +51,56 @@ EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True') == 'True'
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'noreply@yourdomain.com')
 
 # Custom settings from env
-FRONTEND_LOGIN_URL = os.getenv('FRONTEND_LOGIN_URL', 'http://127.0.0.1:8000/auth/login/')
+FRONTEND_LOGIN_URL = os.getenv('FRONTEND_LOGIN_URL', 'http://127.0.0.1:8080/api/v1/auth/login/')
 SUPPORT_EMAIL = os.getenv('SUPPORT_EMAIL', 'support@yourdomain.com')
 SITE_NAME = os.getenv('SITE_NAME', 'PUCEST')
 
 # Custom User
 AUTH_USER_MODEL = 'User.CustomUser'
 
+# UNFOLD = {
+#     "SITE_TITLE": "PUCEST Admin Dashboard",
+#     "SITE_HEADER": "PUCEST Admin Panel",
+#     "SHOW_HISTORY": True,
+#     "DARK_MODE": True,
+#     "SIDEBAR": {
+#         "show_search": True,
+#         "show_all_applications": True,
+#     }
+# }
+
+JAZZMIN_SETTINGS = {
+    "site_title": "PUCEST Admin",
+    "site_header": "PUCEST Control Panel",
+    "site_brand": "PUCEST",
+    "welcome_sign": "Welcome to PUCEST Dashboard",
+    "copyright": "PUCEST Team © 2025",
+
+    # Icons for apps/models
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "Authentication.customuser": "fas fa-user",
+        "Authentication.location": "fas fa-map-marker-alt",
+    },
+
+    # Sidebar settings
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "hide_apps": [],
+    "hide_models": [],
+}
+
 # Installed apps
 INSTALLED_APPS = [
+    'jazzmin',
+    # "unfold",                          # Must come before admin
+    # "unfold.contrib.filters",          # Optional extras
+    # "unfold.contrib.forms",
+    # "unfold.contrib.inlines",
+    # "unfold.contrib.import_export",
+    # "unfold.contrib.guardian",
+    # "unfold.contrib.simple_history",
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -76,6 +117,7 @@ INSTALLED_APPS = [
     'apps.contacts',
     'apps.location',
     'apps.newsportal',
+    'apps.inquiry',
 ]
 
 # Middleware

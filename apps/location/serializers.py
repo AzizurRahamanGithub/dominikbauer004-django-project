@@ -14,4 +14,4 @@ class UserSelectLocationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['pucest_locations']
+        fields = ['delivery_locations']

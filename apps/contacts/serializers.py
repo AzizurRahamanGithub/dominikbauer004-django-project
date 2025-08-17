@@ -17,7 +17,10 @@ class ContactPersonSerializer(serializers.ModelSerializer):
         return [
             {
                 "id": person.id,
-                "name": person.name
+                "Customer Number": person.customer_number,
+                "name": person.name,
+                "email": person.email,
+                
             }
             for person in obj.contact_persons.all()
         ]
@@ -26,8 +29,17 @@ class ContactPersonSerializer(serializers.ModelSerializer):
         
 class UserSelectContactSerializer(serializers.ModelSerializer):
     selected_contact_name = serializers.CharField(source="selected_contact.name", read_only=True)
+    selected_contact_email = serializers.EmailField(source="selected_contact.email", read_only=True)
+    selected_contact_number = serializers.CharField(source="selected_contact.customer_number", read_only=True)
 
     class Meta:
         model = UserSelectedContact
-        fields = ['selected_contact', 'selected_contact_name',]
+        fields = [
+            'selected_contact', 
+            'selected_contact_number',
+            'selected_contact_name',
+            'selected_contact_email',
+            
+        ]
+
 

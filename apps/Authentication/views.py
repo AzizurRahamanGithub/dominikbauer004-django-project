@@ -46,6 +46,7 @@ class BaseAPIView(APIView):
         
 class RegisterView(BaseAPIView):
     permission_classes= [AllowAny]
+    authentication_classes= []
     
     def post(self, request):
         serializer=  RegisterSerializer(data= request.data)
@@ -64,6 +65,7 @@ class RegisterView(BaseAPIView):
         
 class LoginView(BaseAPIView):
     permission_classes = [AllowAny]
+    authentication_classes= []
 
     def post(self, request):
         try:
@@ -147,6 +149,32 @@ class LoginView(BaseAPIView):
             )
             
             
+class LogoutView(BaseAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        try:
+            refresh_token = request.data.get("refresh")
+            if not refresh_token:
+                return self.error_response(
+                    "Refresh token is required",
+                    status_code=status.HTTP_400_BAD_REQUEST
+                )
+
+            token = RefreshToken(refresh_token)
+            token.blacklist() 
+
+            return self.success_response(
+                "Logged out successfully",
+                status_code=status.HTTP_200_OK
+            )
+
+        except Exception as e:
+            return self.error_response(
+                "Logout failed",
+                data=str(e),
+                status_code=status.HTTP_400_BAD_REQUEST
+            )
             
             
 class RequestPasswordResetView(BaseAPIView):

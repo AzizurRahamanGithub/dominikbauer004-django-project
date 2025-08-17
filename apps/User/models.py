@@ -18,9 +18,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     name= models.CharField(max_length=200, blank=True)
     email = models.EmailField(blank=True, null=True)
     phone = models.CharField(max_length=15, blank=True, null=True)
-    address = models.TextField(blank=True, null=True)
+    billing_location = models.TextField(blank=True, null=True)
     
-    pucest_locations= models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
+    delivery_locations= models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
     
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
@@ -30,15 +30,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
-    
-#     selected_contact = models.ForeignKey(
-#     "self", 
-#     null=True,
-#     blank=True,
-#     on_delete=models.SET_NULL,
-#     limit_choices_to={'is_staff': True}, 
-#     related_name='selected_by_users'
-# )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
