@@ -31,3 +31,5 @@ class ContactAssignment(models.Model):
     def __str__(self):
         contacts = ", ".join([f"{c.name} ({c.email} - {c.customer_number})" for c in self.contact_persons.all()])
         return f"Contacts assigned to {self.owner.name}: {contacts}"
+
+

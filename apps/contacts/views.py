@@ -15,7 +15,7 @@ User= get_user_model
 
 
 class MyAssignedContactsView(BaseAPIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         contacts = ContactAssignment.objects.filter(owner=request.user)
@@ -24,7 +24,7 @@ class MyAssignedContactsView(BaseAPIView):
 
 
 class SelectContactPersonView(BaseAPIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     
     def get(self, request):
         user = request.user
