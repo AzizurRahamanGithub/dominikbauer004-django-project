@@ -6,10 +6,12 @@ from django.conf import settings
 User= get_user_model()
 
 class NewsPortal(models.Model):
+    user= models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="news_portal")
     title= models.CharField(max_length=400)
     issue_number= models.PositiveBigIntegerField()
     issue_date= models.DateField()
-    image= models.ImageField(upload_to="beton-news/")
+    banner= models.ImageField(upload_to="beton-news/")
+    pdf_file = models.FileField(upload_to="beton-news/pdfs/", null=True, blank=True)
     external_link= models.URLField()
     created_by= models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -4,4 +4,4 @@ from .models import NewsPortal
 class NewsPortalSerializer(serializers.ModelSerializer):
     class Meta:
         model = NewsPortal
-        fields = ['id', 'title', 'issue_number', 'issue_date', 'image', 'external_link']
+        fields = ['id','user', 'title', 'issue_number', 'issue_date', 'banner','pdf_file', 'external_link']
