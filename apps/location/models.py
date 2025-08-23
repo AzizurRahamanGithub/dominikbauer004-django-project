@@ -7,7 +7,7 @@ class Location(models.Model):
     address = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.area} - {self.user.customer_number}"
+        return f"{self.address} - {self.user.customer_number}"
 
     class Meta:
         verbose_name_plural = "Delivery Locations"

@@ -15,7 +15,7 @@ class InquiryImageInline(admin.TabularInline):
 
 @admin.register(Inquiry)
 class InquiryAdmin(admin.ModelAdmin):
-    list_display = ['offer_number', 'user', 'phone', 'contact_person', 'is_approved', 'created_at', 'offer_pdf']
+    list_display = ['offer_number', 'title',  'user', 'phone', 'contact_person', 'is_approved', 'created_at', 'offer_pdf']
     search_fields = ['offer_number', 'user__name', 'user__company_name', 'phone']
     list_filter = ['is_approved', 'contact_person', 'created_at']
     readonly_fields = ['offer_number', 'user', 'phone', 'description', 'created_at', 'contact_person']

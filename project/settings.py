@@ -12,13 +12,16 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
+# Allowed Hosts (comma separated)
+ALLOWED_HOSTS = ["*"]
+
 # Build paths
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Security
 SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
+# ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 # JWT Configuration
 SIMPLE_JWT = {
@@ -111,6 +114,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
+    
+    "corsheaders",
 
     'apps.User',
     'apps.Authentication',
@@ -120,10 +125,23 @@ INSTALLED_APPS = [
     'apps.inquiry',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://94732f8a593d.ngrok-free.app"
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "https://94732f8a593d.ngrok-free.app",
+]
+
+
 # Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    
+    "corsheaders.middleware.CorsMiddleware",
+    
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

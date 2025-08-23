@@ -1,13 +1,34 @@
 from django.shortcuts import render
 from apps.Authentication.views import BaseAPIView
-from .serializers import InquiryImageSerializer, InquirySerializer,OfferDetailSerializer
+from .serializers import InquiryImageSerializer, InquirySerializer,OfferDetailSerializer,UserSerializer
 from .models import Inquiry, InquiryImage
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from apps.contacts.models import UserSelectedContact
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.db import transaction
+from apps.User.models import CustomUser
 # Create your views here.
+
+
+class InquiryProfileView(BaseAPIView):
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request):
+        try:
+            user = request.user   # CustomUser instance
+            if not isinstance(user, CustomUser):
+                return self.error_response("Profile not found")
+
+            serializer = UserSerializer(user)
+            return self.success_response(
+                "Profile retrieved successfully",
+                data=serializer.data
+            )
+        except CustomUser.DoesNotExist:    
+            return self.error_response("Profile not found")
+        except Exception as e:
+            return self.error_response(f"Unexpected error: {str(e)}")
 
 
 class OfferListAPIView(BaseAPIView):

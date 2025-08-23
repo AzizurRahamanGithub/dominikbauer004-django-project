@@ -1,6 +1,12 @@
 from rest_framework import serializers
 from .models import InquiryImage, Inquiry
 from apps.contacts.serializers import UserSelectContactSerializer  
+from apps.User.models import CustomUser
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'customer_number','name', 'company_name', 'email', 'phone']
 
 class InquiryImageSerializer(serializers.ModelSerializer):
     class Meta:
@@ -8,10 +14,10 @@ class InquiryImageSerializer(serializers.ModelSerializer):
         fields = ['id', 'image']
 
 class InquirySerializer(serializers.ModelSerializer):
+    title = serializers.CharField(read_only=True) 
     company_name = serializers.CharField(source='user.company_name', read_only=True)
     name = serializers.CharField(source='user.name', read_only=True)
-
-    # ✅ Nested contact info
+ 
     contact_person = serializers.SerializerMethodField()
     
     images = InquiryImageSerializer(many=True, read_only=True)
@@ -21,7 +27,7 @@ class InquirySerializer(serializers.ModelSerializer):
         model = Inquiry
         fields = [
             'id', 'offer_number', 'created_at',
-            'company_name', 'name', 'phone', 'description',
+            'company_name', 'name', 'phone', 'title', 'description',
             'contact_person', 'images', 'offer_pdf_url'
         ]
 

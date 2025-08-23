@@ -12,7 +12,8 @@ class NewsPortalListView(BaseAPIView):
     def get(self, request):
         try:
             news= NewsPortal.objects.all()
-            serializer= NewsPortalSerializer(news, many=True)
+            serializer = NewsPortalSerializer(news, context={'request': request}, many=True)
+
             
             return self.success_response("News Articles Retrieved Successfully", data= serializer.data)
         
@@ -27,7 +28,7 @@ class UserNewsView(BaseAPIView):
     def get(self, request, pk):
         try:
             news= NewsPortal.objects.get(pk=pk)
-            serializer= NewsPortalSerializer(news)
+            serializer= NewsPortalSerializer(news, context={'request': request})
             
             return self.success_response(
                 "News featch successfully!",
