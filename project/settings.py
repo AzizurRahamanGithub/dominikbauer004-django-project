@@ -13,9 +13,16 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Allowed Hosts (comma separated)
-ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ["https://dominikbauer004-django-project.onrender.com"]
-
+ALLOWED_HOSTS = [
+    "dominikbauer004-django-project.onrender.com",
+    "localhost",
+    "127.0.0.1"
+]
+CSRF_TRUSTED_ORIGINS = [
+    "https://dominikbauer004-django-project.onrender.com",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000"
+]
 # Build paths
 BASE_DIR = Path(__file__).resolve().parent.parent
 
