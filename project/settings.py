@@ -14,6 +14,7 @@ load_dotenv()
 
 # Allowed Hosts (comma separated)
 ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = ["https://dominikbauer004-django-project.onrender.com"]
 
 # Build paths
 BASE_DIR = Path(__file__).resolve().parent.parent
