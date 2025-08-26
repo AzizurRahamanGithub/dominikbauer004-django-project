@@ -4,7 +4,7 @@ from .models import NewsPortal
 
 @admin.register(NewsPortal)
 class NewsPortalAdmin(admin.ModelAdmin):
-    list_display= ['title', 'issue_number', 'issue_date', 'created_by','created_at','updated_at']
+    list_display= ['title', 'issue_number', 'issue_date','banner', 'pdf_file', 'created_by','created_at','updated_at']
     search_fields= ['title', 'issue_number',"created_by"]
     list_filter= ["issue_number"]
     

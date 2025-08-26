@@ -5,5 +5,5 @@ from .views import UserSelectLocationView, AllLocationView
 
 urlpatterns = [
     path('select-location/', UserSelectLocationView.as_view(),   name='user-select-location'),
-    path('assigned-locations/', AllLocationView.as_view(), name='all-locations')
+    path('delivery-locations/', AllLocationView.as_view(), name='all-delivery-locations')
 ]

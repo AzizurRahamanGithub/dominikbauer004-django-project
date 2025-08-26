@@ -6,28 +6,28 @@ from django.contrib.auth import get_user_model
 
 User= get_user_model()
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id", "customer_number", "name", "email", "phone"]
+
 class ContactPersonSerializer(serializers.ModelSerializer):
-    contact_persons = serializers.SerializerMethodField()
+    contact_persons = UserSerializer(many=True, read_only=True)
 
     class Meta:
         model = ContactAssignment
-        fields = ['id', 'contact_persons']
+        fields = ["id", "contact_persons"]
 
-    def get_contact_persons(self, obj):
-        return [
-            {
-                "id": person.id,
-                "name": person.name
-            }
-            for person in obj.contact_persons.all()
-        ]
+
+
 
    
         
 class UserSelectContactSerializer(serializers.ModelSerializer):
-    selected_contact_name = serializers.CharField(source="selected_contact.name", read_only=True)
+    selected_contact = UserSerializer(read_only=True)
 
     class Meta:
         model = UserSelectedContact
-        fields = ['selected_contact', 'selected_contact_name',]
+        fields = ["selected_contact"]
+
 

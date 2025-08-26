@@ -21,11 +21,12 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/user/', include('apps.User.urls')),
-    path('api/auth/', include('apps.Authentication.urls')),
-    path('api/contact/', include('apps.contacts.urls')),
-    path('api/location/', include('apps.location.urls')),
-    path('api/news/', include('apps.newsportal.urls')),
+    path('api/v1/user/', include('apps.User.urls')),
+    path('api/v1/auth/', include('apps.Authentication.urls')),
+    path('api/v1/contact/', include('apps.contacts.urls')),
+    path('api/v1/location/', include('apps.location.urls')),
+    path('api/v1/news/', include('apps.newsportal.urls')),
+    path('api/v1/inquiry/', include('apps.inquiry.urls')),
 ]
 
 

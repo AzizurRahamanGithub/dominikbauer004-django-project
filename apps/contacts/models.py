@@ -21,7 +21,7 @@ class UserSelectedContact(models.Model):
     selected_contact = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="chosen_by_user")
 
     def __str__(self):
-        return f"{self.owner.name} selected {self.selected_contact.name}"
+        return f"{self.owner.name} ({self.owner.customer_number}) selected {self.selected_contact.name} ({self.selected_contact.email})"
 
 
 class ContactAssignment(models.Model):
@@ -29,4 +29,7 @@ class ContactAssignment(models.Model):
     contact_persons = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="assigned_to_owners", limit_choices_to={'is_staff': True})
 
     def __str__(self):
-        return f"Contacts assigned to {self.owner.name}"
+        contacts = ", ".join([f"{c.name} ({c.email} - {c.customer_number})" for c in self.contact_persons.all()])
+        return f"Contacts assigned to {self.owner.name}: {contacts}"
+
+
