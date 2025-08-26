@@ -138,6 +138,9 @@ CORS_ALLOWED_ORIGINS = [
 # Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    
     'django.contrib.sessions.middleware.SessionMiddleware',
     
     "corsheaders.middleware.CorsMiddleware",
@@ -148,6 +151,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'project.urls'
 
@@ -206,8 +211,14 @@ USE_I18N = True
 USE_TZ = True
 
 # Static & Media
-STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
+
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
+
+# Directory where collectstatic will collect static files
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type

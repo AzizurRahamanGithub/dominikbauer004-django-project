@@ -14,7 +14,7 @@ ENV/
 *.pot
 *.pyc
 db.sqlite3
-media/
+
 
 # Environment variables
 .env
@@ -28,6 +28,3 @@ media/
 # OS files
 .DS_Store
 Thumbs.db
-
-# Static files (if collected)
-staticfiles/
