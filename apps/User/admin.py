@@ -39,7 +39,7 @@ class CustomUserAdmin(UserAdmin):
             'classes': ('wide',),
             'fields': (
                 'customer_number','company_name','name','email',
-                'phone','address','password1','password2',
+                'phone','billing_location','password1','password2',
                 'is_active','is_staff','is_superuser',
                 'groups','user_permissions',
             ),
