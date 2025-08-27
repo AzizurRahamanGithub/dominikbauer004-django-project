@@ -27,7 +27,7 @@ class Inquiry(models.Model):
     # Staff uploaded offer
     offer_pdf = models.FileField(upload_to="offers/pdfs/", blank=True, null=True)
 
-    # ✅ New field for staff approval
+
     is_approved = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
